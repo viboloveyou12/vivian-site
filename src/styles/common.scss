@@ -1,0 +1,17 @@
+@import url('https://fonts.cdnfonts.com/css/gallient');
+
+canvas {
+    position: absolute;
+    z-index: -10;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: scale(2) translateY(30px) translateX(200px);
+}
+
+%gallient-font {
+    font-family: 'Gallient', sans-serif;
+}

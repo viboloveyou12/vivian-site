@@ -1,0 +1,101 @@
+@import '../../styles/common.scss';
+@import '../../styles/variables.scss';
+
+.work {
+    display: flex;
+    flex-direction: row;
+    height: calc(100vh - 100px);
+    margin-top: 70px;
+    
+    .work-left {
+        @extend %gallient-font;
+        height: 100%;
+        flex: 1;
+
+        h1 {
+            font-size: 70px;
+            font-weight: 400;
+            margin: 0;
+            margin-bottom: 30px;
+        }
+
+        aside {
+            ul {
+                list-style-type: none;
+                padding: 0;
+
+                .nav-item {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    margin-bottom: 20px;
+                    color: gray;
+                    
+                    &:hover {
+                        cursor: pointer;
+                    }
+                }
+
+                .decorate-line {
+                    height: 25px;
+                    border: solid 1px $black-color;
+                    position: absolute;
+
+                }
+
+                li {
+                    text-decoration: none;
+                    font-size: 30px;
+                    margin-left: 20px;
+                }
+
+                .isSelected {
+                    color: $black-color;
+                }
+            }
+        }
+    }
+    
+    .work-right {
+        flex: 2;
+
+        .job-info {
+            margin-bottom: 60px;
+
+            .job-info-title {
+                @extend %gallient-font;
+                font-size: 30px;
+
+                a{
+                    margin-left: 15px;
+                    text-decoration: none;
+                }
+            }
+
+            p {
+                font-size: 16px;
+                margin: 5px auto;
+            }
+        }
+
+        .job-desc {
+            .desc-item {
+                display: flex;
+                margin-bottom: 30px;
+
+                p {
+                    margin: 0 0 0 10px;
+                    font-size: 15px;
+                    line-height: 30px;
+                    letter-spacing: 1px;
+                    width: 80%;
+                }
+
+                img {
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+        }
+    }
+}

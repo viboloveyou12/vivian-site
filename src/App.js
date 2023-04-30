@@ -1,24 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import * as React from 'react';
+import './App.scss';
+import { AnimatePresence } from "framer-motion";
+import { useLocation, useRoutes } from 'react-router-dom';
+import routesConfig from './routes/config';
 
 function App() {
+  const location = useLocation();
+  const element = useRoutes(routesConfig)
+
+  if (!element) return null;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AnimatePresence mode="wait" initial={false}>
+        <React.Suspense fallback={null}>
+          {React.cloneElement(element, { key: location.pathname })}
+        </React.Suspense>
+    </AnimatePresence>
   );
 }
 

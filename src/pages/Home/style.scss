@@ -1,0 +1,20 @@
+@import '../../styles/common.scss';
+@import '../../styles/variables.scss';
+
+.home {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 100px);
+    justify-content: center;
+    
+    h1 {
+        @extend %gallient-font;
+        font-size: 6.5vw;
+        font-weight: 400;
+        margin: 0;
+    }
+
+    .main-subtitle {
+        margin-top: 20px;
+    }
+}
