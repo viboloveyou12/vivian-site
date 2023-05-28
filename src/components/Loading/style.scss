@@ -1,0 +1,17 @@
+svg {
+    z-index: 100;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    // transform-origin: calc(100vw/2) calc(100vh/2);
+}
+
+.svgClass {
+    position: absolute;
+    top: 0;
+}
