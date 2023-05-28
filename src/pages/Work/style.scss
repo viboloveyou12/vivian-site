@@ -4,12 +4,13 @@
 .work {
     display: flex;
     flex-direction: row;
+    width: calc(100vw - 160px);
     height: calc(100vh - 100px);
-    margin-top: 70px;
+    justify-content: center;
+    align-items: center;
     
     .work-left {
         @extend %gallient-font;
-        height: 100%;
         flex: 1;
 
         h1 {
@@ -65,16 +66,27 @@
             .job-info-title {
                 @extend %gallient-font;
                 font-size: 30px;
+                display: inline-block;
+            }
 
-                a{
-                    margin-left: 15px;
-                    text-decoration: none;
+            .job-company{
+                @extend %gallient-font;
+                font-size: 30px;
+                display: inline-block;
+                margin-left: 15px;
+                text-decoration: none;
+                color: $bright-green-color;
+                font-weight: 500;
+
+                &:hover {
+                    color: $black-color;
                 }
             }
 
-            p {
+            .job-duration {
                 font-size: 16px;
                 margin: 5px auto;
+                display: block;
             }
         }
 
@@ -85,7 +97,7 @@
 
                 p {
                     margin: 0 0 0 10px;
-                    font-size: 15px;
+                    font-size: 13px;
                     line-height: 30px;
                     letter-spacing: 1px;
                     width: 80%;
@@ -94,6 +106,64 @@
                 img {
                     width: 30px;
                     height: 30px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .work {
+        width: calc(100vw - 80px);
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        height: auto;
+        
+
+        .work-left {
+            margin-top: 10%;
+            margin-bottom: 8%;
+            h1 {
+                font-size: calc(7rem);
+                margin-bottom: 0;
+            }
+            aside ul {
+                .nav-item {
+                    margin-bottom: 10px;
+                }
+                li {
+                    font-size: 25px;
+                }
+            }
+        }
+
+        .work-right {
+            .job-info {
+                margin-bottom: 40px;
+    
+                .job-info-title {
+                    display:block;
+                }
+    
+                .job-company{
+                    margin-left: 0px;
+                    margin-right: 8px;
+                    font-size: 16px;
+                    color: $black-color;
+                    font-family: 'Montserrat', 'Segoe UI', 'Roboto', 'Oxygen',
+                    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                    sans-serif;
+
+                    &::after {
+                        content: ' | ';
+                    }
+                }
+    
+                .job-duration {
+                    font-size: 16px;
+                    margin: 5px auto;
+                    display: inline-block;
                 }
             }
         }

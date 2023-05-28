@@ -4,17 +4,79 @@
 .home {
     display: flex;
     flex-direction: column;
+    width: calc(100vw - 160px);
     height: calc(100vh - 100px);
     justify-content: center;
+    margin-right: 1px;
+
+    .title {
+        overflow: hidden;
+    }
     
     h1 {
         @extend %gallient-font;
-        font-size: 6.5vw;
+        pointer-events: none;
+        font-size: 6vw;
+        line-height: 1.2em;
         font-weight: 400;
         margin: 0;
+        display: inline-block;
+
+        span {
+            position: relative;
+            display: inline-block;
+        }
     }
 
     .main-subtitle {
         margin-top: 20px;
+        font-size: 13px;
+    }
+
+    .star {
+        width: 5%;
+        max-width: 40px;
+        position: absolute;
+        z-index: 10;
+    }
+
+    .line {
+        margin-top: 50px;
+        width: 40%;
+        border-top: solid 1px $black-color;
+    }
+
+    .mobile-nav {
+        display: none;
+        @extend %gallient-font;
+
+        a {
+            text-decoration: none;
+            color: $black-color;
+            font-size: 2rem;
+
+            &:hover {
+                text-decoration: line-through;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .home {
+        width: calc(100vw - 80px);
+        .mobile-nav {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            bottom: 50px;
+            right: 40px;
+        }
+
+        h1 {
+            font-size: 6.5vw;
+            line-height: 1.3em;
+        }
     }
 }

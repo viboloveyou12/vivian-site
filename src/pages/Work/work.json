@@ -1,32 +1,32 @@
 [
     {
         "company": "KKStream",
-        "company_url": "#",
+        "company_url": "https://www.blendvision.com/",
         "job_title": "Front end developer",
         "work_duration": "May 2020 - Present",
         "job_desc": [
-            "Collaborated with a small team of student designers to spearhead a new brand and design system for Scout’s inaugural student-led design conference at Northeastern",
-            "Collaborated with a small team of student designers to spearhead a new brand and design system for Scout’s inaugural student-led design conference at Northeastern"
+            "Developed and maintained high-quality video streaming web applications and CMS systems, including styleing UI interface and implement payment integration and authrization for website.",
+            "Focused on performance optimization and user experience for client website, and ensured the product could be perfectly presented and interacted on various browsers and devices."
         ]
     },
     {
         "company": "Foxconn Tech",
-        "company_url": "#",
+        "company_url": "https://www.foxconn.com/en-us/",
         "job_title": "Front end developer",
         "work_duration": "Jan 2019 - Apr 2020",
         "job_desc": [
-            "Collaborated with a small team of student designers to spearhead a new brand and design system for Scout’s inaugural student-led design conference at Northeastern",
-            "Collaborated with a small team of student designers to spearhead a new brand and design system for Scout’s inaugural student-led design conference at Northeastern"
+            "Collaborated with product team members to develop the single page web application interface of PaaS services, which utilized Docker and Kubernetes, and other container technologies.",
+            "Enhanced user experience and accomplish webpage objectives by creating site structure, navigation, page optimization, and improved web functionality and responsiveness."
         ]
     },
     {
         "company": "Fourdesire",
-        "company_url": "#",
-        "job_title": "Front end developer",
+        "company_url": "https://fourdesire.com/en/",
+        "job_title": "UI/UX Design Intern",
         "work_duration": "Jun - Dec 2018",
         "job_desc": [
-            "Collaborated with a small team of student designers to spearhead a new brand and design system for Scout’s inaugural student-led design conference at Northeastern",
-            "Collaborated with a small team of student designers to spearhead a new brand and design system for Scout’s inaugural student-led design conference at Northeastern"
+            "Researched, designed, and prototyped a more approachable and valuable experience for users  as a core part of the Fortune City App team.",
+            "Increased customer retention rates by ravamping begineers instruction and conducted A/B testing and user interviews with team to gain insight into the needs and behaviors of users."
         ]
     }
 ]

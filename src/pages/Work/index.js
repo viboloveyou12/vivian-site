@@ -1,10 +1,11 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import MainLayout from '../../layout/MainLayout';
 import './style.scss';
 import Star from '../../img/star.svg';
 import data from './work.json';
-import classNames from '../../utils/classNames';
+import withTransition from '../../HOC/withTransition';
 
 function JobItem({ data }) {
   const {
@@ -19,13 +20,18 @@ function JobItem({ data }) {
       <div className="job-info">
         <div className="job-info-title">
           {job_title}
-          <a href={company_url}>@{company}</a>
         </div>
-        <p>{work_duration}</p>
+        <a 
+          className="job-company"
+          href={company_url}
+          target="_blank"
+          rel="noreferrer noopener"
+        >@{company}</a>
+        <p className="job-duration">{work_duration}</p>
       </div>
       <div className="job-desc">
         {job_desc.map((desc, key) => (
-          <div className="desc-item">
+          <div className="desc-item" key={`job_desc_${key}`}>
             <img src={Star} alt="test"></img>
             <p>{desc}</p>
           </div>
@@ -37,8 +43,9 @@ function JobItem({ data }) {
 
 function Work() {
   const [selectedTab, setSelectedTab] = useState(data[0]);
+
   return (
-    <MainLayout>
+    <MainLayout path="/work">
       <main className="work">
         <div className="work-left">
           <h1 className="left-title">Work</h1>
@@ -53,7 +60,7 @@ function Work() {
                   {tab === selectedTab ? (
                     <motion.div layoutId="underline" className="decorate-line"></motion.div>
                   ) : null}
-                  <li className={tab === selectedTab && 'isSelected'}>
+                  <li className={tab === selectedTab ? 'isSelected' : '' }>
                     {tab.company}
                   </li>
                 </div>
@@ -82,4 +89,4 @@ function Work() {
   );
 }
 
-export default Work;
+export default withTransition(Work);
