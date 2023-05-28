@@ -1,7 +1,10 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from 'react-router-dom';
 import Canvas from '../components/Canvas';
 import './style.scss';
+import Star from '../img/star.svg';
+import { MouseContext } from '../context/cursorContext';
+import { useContext } from "react";
 
 const transition = { duration: 0.6, ease: [0.43, 0.13, 0.23, 0.96 ]}
 const mediaHoverTransition = {
@@ -10,14 +13,25 @@ const mediaHoverTransition = {
 }
 
 const MainLayout = ({ path = '', children }) => {
+    const { cursorType, cursorChangeHandler } = useContext(MouseContext);
+    const pages = ['Work', 'About', 'Contact'];
+
     const renderHeader = (path) => (
         path === '/home' ? (
             <header className="layout-header">
                 <div className="header-left">Protfolio@2023</div>
                 <div className="header-nav">
-                    <Link to="/work">Work</Link>
-                    <Link to="/about">About</Link>
-                    <Link to="/contact">Contact</Link>
+                    <img src={Star} alt="header-icon"></img>
+                    {pages.map((name, key) => (
+                        <Link
+                            to={`/${name.toLowerCase()}`}
+                            key={name+key}
+                            // onMouseEnter={() => cursorChangeHandler("hovered")}
+                            // onMouseLeave={() => cursorChangeHandler("")}
+                        >
+                            {name}
+                        </Link>
+                    ))}
                 </div>
             </header>
         ) : (
@@ -50,11 +64,11 @@ const MainLayout = ({ path = '', children }) => {
 
     return (
         <motion.div 
-            className="layout"
+            className={`layout ${path === '/contact' ? 'white-content' : ''}`}
             exit={{ opacity: 0}}
             transition={transition}
         >
-            <Canvas />
+            <Canvas path={path}/>
             {renderHeader(path)}
             {children}
         </motion.div>
