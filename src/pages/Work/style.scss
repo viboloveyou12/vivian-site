@@ -13,11 +13,14 @@
         @extend %gallient-font;
         flex: 1;
 
+        .titleContainer {
+            margin-bottom: 30px;
+        }
+
         h1 {
             font-size: 70px;
             font-weight: 400;
             margin: 0;
-            margin-bottom: 30px;
         }
 
         aside {
@@ -34,6 +37,8 @@
                     
                     &:hover {
                         cursor: pointer;
+                        color: $black-color;
+                        transition: .2s;
                     }
                 }
 
@@ -110,6 +115,10 @@
             }
         }
     }
+}
+
+.titleContainer, .nav-item, .job-info, .desc-item {
+    overflow: hidden;
 }
 
 @media screen and (max-width: 850px) {

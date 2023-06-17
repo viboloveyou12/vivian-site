@@ -32,15 +32,24 @@ $arrow-head-thickness: $shaft-thickness;
             color: #000000;
         }
 
+        .header-left, .header-nav, .header-media {
+          overflow: hidden;
+        }
+
         .header-left {
             font-size: 13px;
-
+            
+            &:hover{
+              overflow: visible;
+            }
+      
             a {
                 text-decoration: none;
                 display: block;
             }
 
         }
+
         .header-nav {
             display: flex;
             @extend %gallient-font;
@@ -280,6 +289,11 @@ $arrow-head-thickness: $shaft-thickness;
     }
     }
   }
+}
+
+.canvasContainer {
+  z-index: -100;
+  position: relative;
 }
 
 @media screen and (max-width: 700px) {

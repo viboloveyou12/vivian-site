@@ -1,14 +1,14 @@
 import { lazy } from 'react';
+import Home from '../pages/Home';
 
-const Home = lazy(() => import('../pages/Home'));
-const Contact = lazy(() => import('../pages/Contact'));
-const About = lazy(() => import('../pages/About'));
 const Work = lazy(() => import('../pages/Work'));
+const About = lazy(() => import('../pages/About'));
+const Contact = lazy(() => import('../pages/Contact'));
 const Error = lazy(() => import('../pages/Error'));
 
 const config = [
   {
-    path: '/home',
+    path: '/',
     element: <Home />
   },
   {

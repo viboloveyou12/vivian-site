@@ -35,14 +35,18 @@
 
         .top { 
 
+            .h1Container {
+                overflow: hidden;
+                margin-bottom: 30px;
+            }
             h1 {
                 @extend %gallient-font;
                 font-size: 6vw;
                 font-weight: 400;
                 line-height: 6vw;
-                margin: 30px 0;
                 color: white;
                 mix-blend-mode: difference;
+                margin-bottom: 10px;
             }
 
             img {
@@ -51,10 +55,13 @@
                 mix-blend-mode: difference;
             }
         
+            .descContainer {
+                overflow: hidden;
+            }
             p {
                 font-size: 13px;
                 line-height: 25px;
-                margin-bottom: 30px;
+                //margin-bottom: 30px;
                 mix-blend-mode: difference;
             }
         }
@@ -68,6 +75,10 @@
         }
         
         .bottom {
+
+            .bottomContainer {
+                overflow: hidden;
+            }
 
             &-left, &-right {
                 display: flex;
@@ -117,6 +128,7 @@
                 p {
                     font-size: 2.5vw;
                     line-height: 3.5vw;
+                    margin-bottom: 30px;
                 }
             }
         }

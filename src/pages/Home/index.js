@@ -1,14 +1,17 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+
 import MainLayout from '../../layout/MainLayout';
 import withTransition from '../../HOC/withTransition';
-import Star from '../../img/star.svg';
+// import Star from '../../img/star.svg';
 import './style.scss';
+
+const MotionLink = motion(Link);
 
 const transition = { duration: 1.3, ease: [0.6, 0.01, -0.05, 0.9] };
 
-const lineTransition = (delay) => ({
+const titleVariants = (delay) => ({
   initial: {
     y: 0
   },
@@ -22,9 +25,10 @@ const lineTransition = (delay) => ({
   }
 });
 
-const letter = {
+const letterVariants = {
   initial: {
     y: 400,
+    transition: transition
   },
   animate: {
     y: 0,
@@ -32,6 +36,37 @@ const letter = {
   },
 };
 
+const navBoxVariants = {
+  show: {
+      transition: {
+          delay: 1,
+          staggerChildren: 0.2,
+      },
+  },
+  hidden: {
+      transition: {
+          delay: 1,
+          staggerChildren: 0.2,
+      }
+  },
+}
+
+const navVariants = {
+  hidden: {
+      y: 50,
+      opacity: 0,
+  },
+  show: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.7,
+        ease: [0.43, 0.13, 0.23, 0.96 ]
+      }
+  },
+}
+
+/*
 const getRandomArbitrary = (min, max) => {
   return Math.random() * (max - min) + min;
 }
@@ -68,13 +103,8 @@ const starTransition = (width, height, count) => {
   }
 };
 
-const firstString = ["H", "i", <>&nbsp;</>, "I’m", <>&nbsp;</>, "Vi", "vi", "an", <>&nbsp;</>, "Y", "an", "g", "."];
-const secondString = ["A", <>&nbsp;</>, "F", "r", "o", "n", "t", "-", "en", "d", <>&nbsp;</>, "D", "e", "v", "e", "l", "o", "p", "er"];
-const thirdString = ["b", "a", "s", "e", "d", <>&nbsp;</>, "in", <>&nbsp;</>, "L", "o", "n", "d", "o", "n", ",", <>&nbsp;</>, "U", "K", "."];
-
 const renderStar = (width, height) => {
   const count = 8;
-  console.log('h1.current', width);
     return (
       <>
         {[...Array(count)].map((x, i) => 
@@ -98,8 +128,6 @@ const useContainerDimensions = (myRef) => {
   
   useEffect(() => {
     const getDimensions = () => {
-      const top = 
-      console.log('getBoundingClientRectm', myRef.current.getBoundingClientRect())
       return {
         width: myRef.current.offsetWidth,
         height: myRef.current.offsetHeight
@@ -123,10 +151,16 @@ const useContainerDimensions = (myRef) => {
 
   return dimensions;
 }
+*/
+
+const firstString = ["H", "i,", <>&nbsp;</>, "I’m", <>&nbsp;</>, "Vi", "vi", "an", <>&nbsp;</>, "Y", "an", "g", "."];
+const secondString = ["A", <>&nbsp;</>, "F", "r", "o", "n", "t", "-", "en", "d", <>&nbsp;</>, "D", "e", "v", "e", "l", "o", "p", "er"];
+const thirdString = ["b", "a", "s", "e", "d", <>&nbsp;</>, "in", <>&nbsp;</>, "L", "o", "n", "d", "o", "n", ",", <>&nbsp;</>, "U", "K", "."];
 
 function Home() {
   const h1 = useRef(null);
-  const { width, height }  = useContainerDimensions(h1);
+  // const { width, height }  = useContainerDimensions(h1);
+  const pages = ['Work', 'About', 'Contact'];
 
   useEffect(() => {
     document.body.classList.add('no-verticalScroll');
@@ -136,7 +170,7 @@ function Home() {
   }, []);
 
   return (
-    <MainLayout path="/home">
+    <MainLayout path="/">
       <main
         className="home"
       >
@@ -146,12 +180,13 @@ function Home() {
             className='title'
             initial='initial'
             animate='animate'
+            exit="initial"
           >
             <motion.h1 
-              variants={lineTransition(0)}
+              variants={titleVariants(0)}
             >
               {firstString.map((item, key) => (
-                <motion.span variants={letter} key={`firstline-${key}`}>{item}</motion.span>
+                <motion.span variants={letterVariants} key={`first-${key}`}>{item}</motion.span>
               ))}
             </motion.h1>
           </motion.div>
@@ -159,11 +194,11 @@ function Home() {
             className='title'
             initial='initial'
             animate='animate'
-            exit='exit'
+            exit="initial"
           >
-            <motion.h1 variants={lineTransition(.6)} ref={h1}>
+            <motion.h1 variants={titleVariants(.6)} ref={h1}>
               {secondString.map((item, key) => (
-                <motion.span variants={letter} key={`secondline-${key}`}>{item}</motion.span>
+                <motion.span variants={letterVariants} key={`second-${key}`}>{item}</motion.span>
               ))}
             </motion.h1>
           </motion.div>
@@ -171,19 +206,32 @@ function Home() {
             className='title'
             initial='initial'
             animate='animate'
-            exit='exit'
+            exit="initial"
           >
-            <motion.h1 variants={lineTransition(1.2)}>
+            <motion.h1 variants={titleVariants(1.2)}>
               {thirdString.map((item, key) => (
-                <motion.span variants={letter} key={`thridline-${key}`}>{item}</motion.span>
+                <motion.span variants={letterVariants} key={`third-${key}`}>{item}</motion.span>
               ))}
             </motion.h1>
           </motion.div>
-          <div className="mobile-nav">
-            <Link to="/work">Work</Link>
-            <Link to="/about">About</Link>
-            <Link to="/contact">Contact</Link>
-          </div>
+          <motion.div 
+            className="mobile-nav"
+            initial="hidden"
+            animate="show"
+            exit="hidden"
+            variants={navBoxVariants}
+          >
+          {pages.map((name, key) => (
+            <div className="mobileNavContainer" key={`mobile-nav-${key}`}>
+              <MotionLink 
+                  to={`/${name.toLowerCase()}`}
+                  variants={navVariants}
+              >
+                  {name}
+              </MotionLink>
+            </div>
+          ))}
+          </motion.div>
         </div>
       </main>
     </MainLayout>

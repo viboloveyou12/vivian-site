@@ -1,10 +1,7 @@
-import { useLocation } from 'react-router-dom';
 import MainLayout from '../../layout/MainLayout';
-import withTransition from '../../HOC/withTransition';
 import './style.scss';
 
 function Error() {
-  const { pathname } = useLocation();
   return (
     <MainLayout path="/">
       <div className="error">
@@ -17,4 +14,4 @@ function Error() {
   );
 }
 
-export default withTransition(Error);
+export default Error;

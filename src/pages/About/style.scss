@@ -13,10 +13,10 @@
     align-items: center;
     height: calc(100vh);
     width: calc(100vw - 160px);
+    gap: 30px;
 
     &-left {
         @extend %gallient-font;
-        // height: 100%;
         flex: 1;
         pointer-events: none;
 
@@ -27,7 +27,14 @@
             margin-top: 0;
             position: fixed;
             top: 28%;
+            left: 10%;
             z-index: 10;
+            overflow: hidden;
+
+            span {
+                position: relative;
+                display: inline-block;
+            }
         }
 
         img {
@@ -37,13 +44,16 @@
             position: fixed;
             display: inline-block;
             top: 35%;
+            left: 10%;
         }
     }
 
     &-right {
-        // margin-top: 70px;
-        flex: 1.2;
+        flex: 1.5;
 
+        .overflow {
+            overflow: hidden;
+        }
         h2 {
             width: 100%;
             max-width: 800px;
@@ -114,10 +124,6 @@
             margin-top: 3%;
         }
     }
-}
-
-@media screen and (min-width: 1200px) {
-    
 }
 
 @media only screen and (min-width: 700px) and (max-width: 800px) {

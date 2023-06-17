@@ -1,11 +1,61 @@
-import { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence, usePresence } from 'framer-motion';
 import MainLayout from '../../layout/MainLayout';
 import './style.scss';
 import Star from '../../img/star.svg';
 import data from './work.json';
 import withTransition from '../../HOC/withTransition';
+import { transition } from '../../animation';
+
+const variants = {
+  initial: {
+    y: 50,
+    opacity: 0,
+    rotate: 10,
+    transition: transition
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    rotate: 0,
+    transition: transition
+  },
+  exit: {
+    y: 50,
+    opacity: 0,
+    transition: transition
+  }
+}
+
+const left = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1,
+    }
+  }
+}
+
+const right = {
+  animate: {
+    transition: {
+      staggerChildren: 0.1,
+      // delayChildren: 0.5,
+    }
+  },
+}
+
+const item = {
+  initial: {
+    y: 50,
+    opacity: 0,
+    transition: transition
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: transition
+  }
+}
 
 function JobItem({ data }) {
   const {
@@ -16,41 +66,61 @@ function JobItem({ data }) {
     job_desc
   } = data || {};
   return (
-    <>
+    <motion.div
+      variants={right}
+      animate="animate"
+      initial="initial"
+      exit="initial"
+    >
       <div className="job-info">
-        <div className="job-info-title">
+        <motion.div className="job-info-title" variants={item} >
           {job_title}
-        </div>
-        <a 
+        </motion.div>
+        <motion.a
           className="job-company"
           href={company_url}
           target="_blank"
           rel="noreferrer noopener"
-        >@{company}</a>
-        <p className="job-duration">{work_duration}</p>
+          variants={item}
+        >@{company}</motion.a>
+        <motion.p className="job-duration" variants={item}>{work_duration}</motion.p>
       </div>
       <div className="job-desc">
         {job_desc.map((desc, key) => (
           <div className="desc-item" key={`job_desc_${key}`}>
-            <img src={Star} alt="test"></img>
-            <p>{desc}</p>
+            <motion.img src={Star} alt="test" variants={item}></motion.img>
+            <motion.p variants={item}>{desc}</motion.p>
           </div>
         ))}
       </div>
-    </>
+    </motion.div>
   )
 }
 
 function Work() {
   const [selectedTab, setSelectedTab] = useState(data[0]);
+  const [isPresent, safeToRemove] = usePresence();
+
+  useEffect(() => {
+    !isPresent && safeToRemove(safeToRemove, 1000);
+  }, [isPresent, safeToRemove])
 
   return (
     <MainLayout path="/work">
       <main className="work">
         <div className="work-left">
-          <h1 className="left-title">Work</h1>
+          <div className='titleContainer'>
+            <motion.h1 variants={variants} exit="exit" animate="animate" initial="initial">
+              Work
+            </motion.h1>
+          </div>
           <aside>
-            <ul>
+            <motion.ul
+              variants={left}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+            >
               {data.map((tab) => (
                 <div 
                   className="nav-item"
@@ -58,31 +128,27 @@ function Work() {
                   onClick={() => setSelectedTab(tab)}
                 >
                   {tab === selectedTab ? (
-                    <motion.div layoutId="underline" className="decorate-line"></motion.div>
+                    <motion.div layoutId="underline" className="decorate-line" variants={variants}></motion.div>
                   ) : null}
-                  <li className={tab === selectedTab ? 'isSelected' : '' }>
+                  <motion.li
+                    className={tab === selectedTab ? 'isSelected' : '' }
+                    variants={variants}
+                  >
                     {tab.company}
-                  </li>
+                  </motion.li>
                 </div>
               ))}
-            </ul>
+            </motion.ul>
           </aside>
         </div>
         <div className="work-right">
           <AnimatePresence mode="wait">
-            <motion.div
+            {isPresent && <motion.div
               key={selectedTab ? selectedTab.company+'_main' : 'empty'}
-              initial={{ y: 10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -10, opacity: 0 }}
-              transition={{ duration: 0.3 }}
             >
               <JobItem data={selectedTab}/>
-            </motion.div>
+            </motion.div>}
           </AnimatePresence>
-          {/* {data.map((item) => (
-            <JobItem data={item}/>
-          ))} */}
         </div>
       </main>
     </MainLayout>

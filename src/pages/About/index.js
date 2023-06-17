@@ -1,9 +1,72 @@
-import { useLocation } from 'react-router-dom';
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import MainLayout from '../../layout/MainLayout';
-import withTransition from '../../HOC/withTransition';
+// import withTransition from '../../HOC/withTransition';
 import Portrait from '../../img/portrait.png';
+import { transition } from '../../animation';
 import './style.scss';
+
+const container = (delay) => ({
+  animate: {
+    transition: {
+      delayChildren: delay,
+      staggerChildren: 0.1,
+      staggerDirection: 1
+    }
+  }
+});
+
+const letterItem = {
+  initial: {
+    y: 300,
+    transition: transition
+  },
+  animate: {
+    y: 0,
+    transition: transition
+  },
+};
+
+const skillItem = {
+  initial: {
+    y: 50,
+    opacity: 0,
+    transition: transition
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: transition
+  },
+};
+
+const wording = (delay) => ({
+  initial: {
+    y: 100,
+    opacity: 0,
+    transition: transition
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+    transition: {delay: delay, ...transition}
+  }
+})
+
+const image = {
+  initial: {
+    clipPath: 'inset(350px 0px 0 0)',
+    opacity: 0,
+    transition: transition
+  },
+  animate: {
+    clipPath: 'inset(0px 0px 0 0)',
+    opacity: 1,
+    transition: { delay: .5,  ...transition }
+  }
+}
+
+const skills = ['AWS', 'Node.js', 'React.js', 'Next.js', 'Google Analytic', 'Google Tag Manager', 'Next.js', 'CMS', 'Git', 'AWS', 'Node.js', 'React.js'];
+const aboutLetters = ['A', 'b', 'o', 'u', 't'];
 
 function About() {
 
@@ -11,38 +74,49 @@ function About() {
     <MainLayout path="/about">
       <main className="about">
         <div className="about-left">
-          <h1>About</h1>
-          <img src={Portrait} alt="portrait"></img>
+          <motion.div initial="initial" animate="animate" exit="initial">
+            <motion.h1 variants={container(1)}>
+              {aboutLetters.map((letter, key) => (
+                <motion.span variants={letterItem} key={`aboutLetter-${key}`} className="letter">{letter}</motion.span>
+              ))}
+            </motion.h1>
+          </motion.div>
+          <motion.img
+          initial="initial"
+          animate="animate"
+          exit="initial"
+          variants={image}
+          src={Portrait}
+          alt="portrait">
+          </motion.img>
         </div>
         <div className="about-right">
-          <h2>
-          I'm Vivian Yang, a front end developer and problem solver.
-          </h2>
-          <p>
-          Born in 1996 in Taipei, Taiwan.
-          <br></br>
-          I have three years of experience in web development, I have worked in various industries from cloud service to OTT streaming service to build web applications. 
-          Back in 2018, when I was specialized in Interactive Design, I was fascinated with the digital world and coding, and what excites me most about working in software development is being able to solve real problems and have a positive impact in the word. 
-          </p>
-          <h3>SKILLS</h3>
-          <div className="about-skills">
-            <div>AWS</div>
-            <div>Node.js</div>
-            <div>React.js</div>
-            <div>Next.js</div>
-            <div>Google Analytic</div>
-            <div>Google Tag Manager</div>
-            <div>Next.js</div>
-            <div>CMS</div>
-            <div>Git</div>
-            <div>AWS</div>
-            <div>Node.js</div>
-            <div>React.js</div>
+          <div className="overflow">
+            <motion.h2 variants={wording(1)}>
+            I'm Vivian Yang, a front end developer and problem solver.
+            </motion.h2>
           </div>
+          <div className="overflow">
+            <motion.p variants={wording(1.5)}>
+            Born in 1996 in Taipei, Taiwan.
+            <br></br>
+            I have three years of experience in web development, I have worked in various industries from cloud service to OTT streaming service to build web applications. 
+            Back in 2018, when I was specialized in Interactive Design, I was fascinated with the digital world and coding, and what excites me most about working in software development is being able to solve real problems and have a positive impact in the word. 
+            </motion.p>
+          </div>
+          <div className="overflow">
+            <motion.h3 variants={wording(2)}>SKILLS</motion.h3>
+          </div>
+          <motion.div variants={container(2.5)} className="about-skills overflow">
+            {skills.map((skill, key) => (
+              <motion.div variants={skillItem} key={skill+key}>{skill}</motion.div>
+            ))}
+          </motion.div>
         </div>
       </main>
     </MainLayout>
   );
 }
 
-export default withTransition(About);
+export default About;
+//export default withTransition(About);
