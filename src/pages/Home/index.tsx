@@ -1,9 +1,8 @@
 import { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 
 import MainLayout from '../../layout/MainLayout';
-import withTransition from '../../HOC/withTransition';
 // import Star from '../../img/star.svg';
 import './style.scss';
 
@@ -11,7 +10,7 @@ const MotionLink = motion(Link);
 
 const transition = { duration: 1.3, ease: [0.6, 0.01, -0.05, 0.9] };
 
-const titleVariants = (delay) => ({
+const title = (delay: number): Variants => ({
   initial: {
     y: 0
   },
@@ -25,18 +24,18 @@ const titleVariants = (delay) => ({
   }
 });
 
-const letterVariants = {
+const letter: Variants  = {
   initial: {
     y: 400,
     transition: transition
   },
   animate: {
     y: 0,
-    transition: { duration: 1, ...transition },
+    transition: transition,
   },
 };
 
-const navBoxVariants = {
+const navContainer: Variants  = {
   show: {
       transition: {
           delay: 1,
@@ -51,7 +50,7 @@ const navBoxVariants = {
   },
 }
 
-const navVariants = {
+const navItem: Variants  = {
   hidden: {
       y: 50,
       opacity: 0,
@@ -157,7 +156,7 @@ const firstString = ["H", "i,", <>&nbsp;</>, "I’m", <>&nbsp;</>, "Vi", "vi", "
 const secondString = ["A", <>&nbsp;</>, "F", "r", "o", "n", "t", "-", "en", "d", <>&nbsp;</>, "D", "e", "v", "e", "l", "o", "p", "er"];
 const thirdString = ["b", "a", "s", "e", "d", <>&nbsp;</>, "in", <>&nbsp;</>, "L", "o", "n", "d", "o", "n", ",", <>&nbsp;</>, "U", "K", "."];
 
-function Home() {
+const Home: React.FC = () => {
   const h1 = useRef(null);
   // const { width, height }  = useContainerDimensions(h1);
   const pages = ['Work', 'About', 'Contact'];
@@ -183,10 +182,10 @@ function Home() {
             exit="initial"
           >
             <motion.h1 
-              variants={titleVariants(0)}
+              variants={title(0)}
             >
               {firstString.map((item, key) => (
-                <motion.span variants={letterVariants} key={`first-${key}`}>{item}</motion.span>
+                <motion.span variants={letter} key={`first-${key}`}>{item}</motion.span>
               ))}
             </motion.h1>
           </motion.div>
@@ -196,9 +195,9 @@ function Home() {
             animate='animate'
             exit="initial"
           >
-            <motion.h1 variants={titleVariants(.6)} ref={h1}>
+            <motion.h1 variants={title(.6)} ref={h1}>
               {secondString.map((item, key) => (
-                <motion.span variants={letterVariants} key={`second-${key}`}>{item}</motion.span>
+                <motion.span variants={letter} key={`second-${key}`}>{item}</motion.span>
               ))}
             </motion.h1>
           </motion.div>
@@ -208,9 +207,9 @@ function Home() {
             animate='animate'
             exit="initial"
           >
-            <motion.h1 variants={titleVariants(1.2)}>
+            <motion.h1 variants={title(1.2)}>
               {thirdString.map((item, key) => (
-                <motion.span variants={letterVariants} key={`third-${key}`}>{item}</motion.span>
+                <motion.span variants={letter} key={`third-${key}`}>{item}</motion.span>
               ))}
             </motion.h1>
           </motion.div>
@@ -219,13 +218,13 @@ function Home() {
             initial="hidden"
             animate="show"
             exit="hidden"
-            variants={navBoxVariants}
+            variants={navContainer}
           >
           {pages.map((name, key) => (
             <div className="mobileNavContainer" key={`mobile-nav-${key}`}>
               <MotionLink 
                   to={`/${name.toLowerCase()}`}
-                  variants={navVariants}
+                  variants={navItem}
               >
                   {name}
               </MotionLink>
@@ -238,4 +237,4 @@ function Home() {
   );
 }
 
-export default withTransition(Home);
+export default Home;

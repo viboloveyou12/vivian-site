@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import MainLayout from '../../layout/MainLayout';
 //import withTransition from '../../HOC/withTransition';
 import Star from '../../img/star.svg';
@@ -10,7 +10,7 @@ import './style.scss';
 
 const MotionLink = motion(Link);
 
-const decoratedLine = {
+const decoratedLine: Variants = {
   hidden: {
       width: 0,
       transition: transition
@@ -24,7 +24,7 @@ const decoratedLine = {
   }
 }
 
-const top = (delay) => ({
+const top = (delay: number): Variants => ({
   hidden: {
       y: 50,
       opacity: 0,
@@ -42,7 +42,7 @@ const top = (delay) => ({
   
 })
 
-const bottom = {
+const bottom: Variants = {
   show: {
     transition: {
         staggerChildren: 0.1,
@@ -54,7 +54,7 @@ const bottom = {
   }
 }
 
-const bottomItem = {
+const bottomItem: Variants = {
   hidden: {
       y: -30,
       opacity: 0,
@@ -96,7 +96,7 @@ const media = [
   },
 ]
 
-function Contact() {
+const Contact: React.FC = () => {
   //const [showLoading, setShowLoading] = useState(true);
   useEffect(() => {
     // setTimeout(() => {

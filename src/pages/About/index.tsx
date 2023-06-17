@@ -1,11 +1,11 @@
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import MainLayout from '../../layout/MainLayout';
 // import withTransition from '../../HOC/withTransition';
 import Portrait from '../../img/portrait.png';
 import { transition } from '../../animation';
 import './style.scss';
 
-const container = (delay) => ({
+const container = (delay: number):Variants => ({
   animate: {
     transition: {
       delayChildren: delay,
@@ -15,7 +15,7 @@ const container = (delay) => ({
   }
 });
 
-const letterItem = {
+const letterItem: Variants = {
   initial: {
     y: 300,
     transition: transition
@@ -26,7 +26,7 @@ const letterItem = {
   },
 };
 
-const skillItem = {
+const skillItem: Variants = {
   initial: {
     y: 50,
     opacity: 0,
@@ -39,7 +39,7 @@ const skillItem = {
   },
 };
 
-const wording = (delay) => ({
+const wording = (delay: number):Variants => ({
   initial: {
     y: 100,
     opacity: 0,
@@ -52,7 +52,7 @@ const wording = (delay) => ({
   }
 })
 
-const image = {
+const image: Variants = {
   initial: {
     clipPath: 'inset(350px 0px 0 0)',
     opacity: 0,

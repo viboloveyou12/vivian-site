@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence, usePresence } from 'framer-motion';
+import { motion, AnimatePresence, usePresence, Variants } from 'framer-motion';
 import MainLayout from '../../layout/MainLayout';
 import './style.scss';
 import Star from '../../img/star.svg';
 import data from './work.json';
-import withTransition from '../../HOC/withTransition';
 import { transition } from '../../animation';
 
-const variants = {
+const variants: Variants = {
   initial: {
     y: 50,
     opacity: 0,
@@ -27,7 +26,7 @@ const variants = {
   }
 }
 
-const left = {
+const left: Variants = {
   animate: {
     transition: {
       staggerChildren: 0.1,
@@ -35,7 +34,7 @@ const left = {
   }
 }
 
-const right = {
+const right: Variants = {
   animate: {
     transition: {
       staggerChildren: 0.1,
@@ -44,7 +43,7 @@ const right = {
   },
 }
 
-const item = {
+const item: Variants = {
   initial: {
     y: 50,
     opacity: 0,
@@ -57,7 +56,18 @@ const item = {
   }
 }
 
-function JobItem({ data }) {
+interface JobItemProps {
+  data: Props
+}
+interface Props {
+    company: string;
+    company_url: string;
+    job_title: string;
+    work_duration: string;
+    job_desc: string[];
+}
+
+function JobItem({ data }: JobItemProps) {
   const {
     company,
     company_url,
@@ -102,7 +112,7 @@ function Work() {
   const [isPresent, safeToRemove] = usePresence();
 
   useEffect(() => {
-    !isPresent && safeToRemove(safeToRemove, 1000);
+    !isPresent && safeToRemove();
   }, [isPresent, safeToRemove])
 
   return (
@@ -121,7 +131,7 @@ function Work() {
               animate="animate"
               exit="exit"
             >
-              {data.map((tab) => (
+              {data.map((tab: Props ) => (
                 <div 
                   className="nav-item"
                   key={tab.company}
@@ -155,4 +165,4 @@ function Work() {
   );
 }
 
-export default withTransition(Work);
+export default Work;

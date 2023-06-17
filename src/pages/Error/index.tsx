@@ -1,7 +1,7 @@
 import MainLayout from '../../layout/MainLayout';
 import './style.scss';
 
-function Error() {
+const Error: React.FC = () => {
   return (
     <MainLayout path="/">
       <div className="error">
