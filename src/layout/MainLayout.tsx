@@ -1,16 +1,17 @@
-import { motion } from "framer-motion";
+import { ReactNode } from 'react';
+import { motion, Variants } from "framer-motion";
 import { Link } from 'react-router-dom';
 import Canvas from '../components/Canvas';
 import './style.scss';
 import Star from '../img/star.svg';
-import { MouseContext } from '../context/cursorContext';
-import { useContext } from "react";
+// import { MouseContext } from '../context/cursorContext';
+// import { useContext } from "react";
 import { transition, slideIn } from '../animation';
 import { externalUrls } from "../constant";
 
 const MotionLink = motion(Link);
 
-const layout = {
+const layout: Variants = {
     initial: {
         backgroundColor: '#EAE4DF',
         transition: {
@@ -24,7 +25,7 @@ const layout = {
     }
 }
 
-const navContainer = {
+const navContainer: Variants = {
     initial: {
         transition: {
             delay: 1,
@@ -41,7 +42,7 @@ const navContainer = {
     },
 }
 
-const navItem = {
+const navItem: Variants = {
     initial: {
         y: 50,
         opacity: 0,
@@ -55,7 +56,7 @@ const navItem = {
     
 }
 
-const decoratedLine = {
+const decoratedLine: Variants = {
     initial: {
         width: 0,
         transition: transition
@@ -73,11 +74,16 @@ const media = [
     { name: "L", externalUrl: externalUrls.linkedin },
 ];
 
-const MainLayout = ({ path = '', children }) => {
-    // eslint-disable-next-line
-    const { cursorType, cursorChangeHandler } = useContext(MouseContext);
+interface Props {
+    path?: string;
+    children: ReactNode;
+}
 
-    const renderHeader = (path) => (
+const MainLayout = ({ path = '', children }: Props ) => {
+    // eslint-disable-next-line
+    // const { cursorType, cursorChangeHandler } = useContext(MouseContext);
+
+    const renderHeader = (path: string) => (
         path === '/' ? (
             <header className="layout-header">
                 <div className="header-left">
@@ -161,7 +167,7 @@ const MainLayout = ({ path = '', children }) => {
     return (
         <motion.div 
             className={`layout ${path === '/contact' && 'white-content'}`}
-            variants={ path === '/contact' && layout}
+            {...(path === '/contact' && { variants: layout })}
             transition={transition}
             animate="animate"
             initial="initial"

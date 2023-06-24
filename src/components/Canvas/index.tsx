@@ -1,11 +1,28 @@
 import React from 'react';
-
-let canvas, ctx;
-let render;
+import './style.scss';
+let canvas: HTMLCanvasElement;
 
 class Blob {
+
+  points: Point[];
+  ctx: any;
+  _color: string;
+  _canvas: HTMLCanvasElement;
+  _points: number;
+  _radius: number;
+  _position: {x: number, y: number};
+  mousePos: {x: number, y: number};
+
   constructor() {
     this.points = [];
+    this.ctx = null;
+    this._color = '#33FFB5';
+    this._canvas = document.createElement('canvas');
+    this._points = 32;
+    this._radius = 150;
+    this._position = {x: 0.5, y: 0.5};
+    this.mousePos = {x: 0, y: 0};
+
   }
   
   init() {
@@ -19,11 +36,11 @@ class Blob {
   render() {
     let canvas = this.canvas;
     let ctx = this.ctx;
-    let position = this.position;
+    // let position = this.position;
     let pointsArray = this.points;
-    let radius = this.radius;
+    // let radius = this.radius;
     let points = this.numPoints;
-    let divisional = this.divisional;
+    // let divisional = this.divisional;
     let center = this.center;
     
     ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -54,8 +71,8 @@ class Blob {
       p1 = p2;
     }
 
-    var xc = (p1.x + _p2.x) / 2;
-    var yc = (p1.y + _p2.y) / 2;
+    xc = (p1.x + _p2.x) / 2;
+    yc = (p1.y + _p2.y) / 2;
     ctx.quadraticCurveTo(p1.x, p1.y, xc, yc);
     // ctx.lineTo(_p2.x, _p2.y);
 
@@ -75,7 +92,7 @@ class Blob {
     requestAnimationFrame(this.render.bind(this));
   }
   
-  push(item) {
+  push(item: Point) {
     if(item instanceof Point) {
       this.points.push(item);
     }
@@ -92,6 +109,7 @@ class Blob {
     if(value instanceof HTMLElement && value.tagName.toLowerCase() === 'canvas') {
       this._canvas = canvas;
       this.ctx = this._canvas.getContext('2d');
+      // this.ctx.scale(1.5, 1.5);
     }
   }
   get canvas() {
@@ -132,17 +150,19 @@ class Blob {
   get center() {
     return { x: this.canvas.width * this.position.x, y: this.canvas.height * this.position.y };
   }
-  
-  set running(value) {
-    this._running = value === true;
-  }
-  get running() {
-    return this.running !== false;
-  }
 }
 
 class Point {
-  constructor(azimuth, parent) {
+  parent: Blob;
+  azimuth: number;
+  _components: {x: number, y: number};
+  _acceleration: number;
+  _speed: number;
+  _radialEffect: number;
+  _elasticity: number;
+  _friction: number;
+
+  constructor(azimuth: number, parent: Blob) {
     this.parent = parent;
     this.azimuth = Math.PI - azimuth;
     this._components = { 
@@ -151,9 +171,14 @@ class Point {
     };
     
     this.acceleration = -0.3 + Math.random() * 0.6;
+    this._acceleration = 0;
+    this._speed = 0;
+    this._radialEffect = 0;
+    this._elasticity = 0.001;
+    this._friction = 0.0065;
   }
   
-  solveWith(leftPoint, rightPoint) {
+  solveWith(leftPoint: Point, rightPoint: Point) {
     this.acceleration = (-0.3 * this.radialEffect + ( leftPoint.radialEffect - this.radialEffect ) + ( rightPoint.radialEffect - this.radialEffect )) * this.elasticity - this.speed * this.friction;
   }
   
@@ -170,7 +195,7 @@ class Point {
   set speed(value) {
     if(typeof value == 'number') {
       this._speed = value;
-      this.radialEffect += this._speed * 3;
+      this.radialEffect += this._speed * 4;
     }
   }
   get speed() {
@@ -215,34 +240,51 @@ class Point {
   }
 }
 
+const getClassName = (path: string) => {
+  switch (path) {
+    case '/work':
+      return 'align-left';
+    case '/contact':
+    case '/about':
+        return 'none';
+    default:
+      return 'align-right';
+  }
+}
 
-const Canvas = ({ draw, height, width }) => {
-    let ref = React.useRef(null);
-    let blob = new Blob;
+interface CanvasProps {
+  path: string;
+}
+
+const Canvas = ({ path }: CanvasProps) => {
+    let ref = React.useRef<HTMLInputElement>(null);
+    let blob = new Blob();
 
     React.useEffect(() => {
-        if (ref.current.children.length) return;
+        if (ref.current!.children.length) return;
 
-        canvas = document.createElement('canvas');
-        canvas.setAttribute('touch-action', 'none');
+        canvas = document.createElement('canvas') as HTMLCanvasElement;
 
-        ref.current.appendChild(canvas);
+        ref.current!.appendChild(canvas);
 
         let resize = function() {
           canvas.width = window.innerWidth;
           canvas.height = window.innerHeight;
+          var ctx = canvas.getContext('2d');
+          ctx!.translate(-300, -(window.innerHeight/3));
+          ctx!.scale(1.8, 1.8);
         }
         window.addEventListener('resize', resize);
         resize();
         
         let oldMousePoint = { x: 0, y: 0};
         let hover = false;
-        let mouseMove = function(e) {
+        let mouseMove = function(e: MouseEvent) {
           
           let pos = blob.center;
           let diff = { x: e.clientX - pos.x, y: e.clientY - pos.y };
           let dist = Math.sqrt((diff.x * diff.x) + (diff.y * diff.y));
-          let angle = null;
+          let angle = 0;
           
           blob.mousePos = { x: pos.x - e.clientX, y: pos.y - e.clientY };
           
@@ -255,13 +297,14 @@ const Canvas = ({ draw, height, width }) => {
             let vector = { x: e.clientX - pos.x, y: e.clientY - pos.y };
             angle = Math.atan2(vector.y, vector.x);
             hover = false;
-            blob.color = null;
+            // Not sure
+            //blob.color = null; 
           }
           
-          if(typeof angle == 'number') {
+          if(angle !== 0) {
             
-            let nearestPoint = null;
-            let distanceFromPoint = 1020;
+            let nearestPoint: Point | null = null;
+            let distanceFromPoint = 900;
             
             blob.points.forEach((point)=> {
               if(Math.abs(angle - point.azimuth) < distanceFromPoint) {
@@ -274,9 +317,9 @@ const Canvas = ({ draw, height, width }) => {
             
             if(nearestPoint) {
               let strength = { x: oldMousePoint.x - e.clientX, y: oldMousePoint.y - e.clientY };
-              strength = Math.sqrt((strength.x * strength.x) + (strength.y * strength.y)) * 5;
-              if(strength > 1000) strength = 1000;
-              nearestPoint.acceleration = strength / 1000 * (hover ? -1 : 1);
+              let sqrtStrength = Math.sqrt((strength.x * strength.x) + (strength.y * strength.y)) * 5;
+              if(sqrtStrength > 900) sqrtStrength = 900;
+              (nearestPoint as Point).acceleration = sqrtStrength / 900 * (hover ? -1 : 1);
             }
           }
           
@@ -291,7 +334,14 @@ const Canvas = ({ draw, height, width }) => {
     })
 
     return (
-      <div id="blob" ref={ref}></div>
+      <div 
+        className={
+          `canvas
+          ${getClassName(path)}`
+        }
+        id="blob"
+        ref={ref}>
+      </div>
     )
 }
 

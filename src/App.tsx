@@ -1,6 +1,6 @@
 import * as React from 'react';
 import './App.scss';
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { useLocation, useRoutes } from 'react-router-dom';
 import routesConfig from './routes/config';
 import CursorContextProvider from './context/cursorContext';
@@ -18,7 +18,7 @@ function App() {
         <AnimatePresence mode="wait">
           {React.cloneElement(element, { location: location, key: location.pathname })}
         </AnimatePresence>
-        <Cursor location={location.pathname}/>
+        <Cursor/>
     </CursorContextProvider>
   );
 }
