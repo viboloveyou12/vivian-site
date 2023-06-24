@@ -78,7 +78,7 @@ const MainLayout = ({ path = '', children }: Props ) => {
                         animate="animate"
                         exit="initial"
                     >
-                        Portfolio@2023
+                        VivianYang@2023
                     </motion.div>
                 </div>
                 <motion.div

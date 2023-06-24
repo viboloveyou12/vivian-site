@@ -65,6 +65,6 @@
     },
     {
         "name": "CI/CD",
-        "link": ""
+        "link": "https://docs.gitlab.com/ee/ci/"
     }
 ]
