@@ -1,14 +1,18 @@
+import { motion } from 'framer-motion';
 import MainLayout from '../../layout/MainLayout';
 import './style.scss';
+import { slideIn } from '../../animation'; 
+
+
 
 const Error: React.FC = () => {
   return (
     <MainLayout path="/">
       <div className="error">
-        <div className="error-content">
+        <motion.div className="error-content" variants={slideIn(50)} animate="animate" initial="initial" exit="initial">
           <h1>404.</h1>
           <h5>Oops, We can’t find the page :(</h5>
-        </div>
+        </motion.div>
       </div>
     </MainLayout>
   );
