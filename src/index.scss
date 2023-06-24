@@ -9,7 +9,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #EAE4DF;
+  background-color: $beige-color;
   overflow-x: hidden; /* Hide horizontal scrollbar */
   box-sizing: border-box;
   height: 100vh;
@@ -20,14 +20,8 @@ body {
   -ms-font-smoothing: antialiased;
   -o-font-smoothing: antialiased;
   font-smoothing: antialiased;
-  // cursor: none;
 }
 
 .no-verticalScroll {
   overflow-y: hidden; /* Hide vertical scrollbar */
 }
-
-.black-bg {
-  background-color: $black-color;
-}
-
