@@ -2,6 +2,7 @@ import * as React from 'react';
 import './App.scss';
 import { AnimatePresence } from "framer-motion";
 import { useLocation, useRoutes } from 'react-router-dom';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import routesConfig from './routes/config';
 import CursorContextProvider from './context/cursorContext';
 import Cursor from './components/Cursor';
@@ -14,12 +15,17 @@ function App() {
   if (!element) return null;
 
   return (
-    <CursorContextProvider>
+    <HelmetProvider>
+      <Helmet>
+          <link rel="preload" href="https://fonts.cdnfonts.com/css/gallient" as="font" crossOrigin="anonymous" />
+      </Helmet>
+      <CursorContextProvider>
         <AnimatePresence mode="wait">
           {React.cloneElement(element, { location: location, key: location.pathname })}
         </AnimatePresence>
         <Cursor/>
     </CursorContextProvider>
+    </HelmetProvider>
   );
 }
 
