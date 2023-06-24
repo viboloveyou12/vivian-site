@@ -103,16 +103,22 @@ const MainLayout = ({ path = '', children }: Props ) => {
                     exit="initial"
                     variants={navContainer}
                 >
-                    <motion.img src={Star} alt="header-icon" ></motion.img>
+                    <motion.img
+                        src={Star}
+                        alt="header-icon"
+                        variants={navItem}
+                    ></motion.img>
                     {pages.map((name, key) => (
                         <MotionLink 
                             to={`/${name.toLowerCase()}`}
                             key={`header-nav-${key}`}
                             variants={navItem}
+                            className='pseudo-text-effect'
+                            data-after={name}
                             // onMouseEnter={() => cursorChangeHandler("hovered")}
                             // onMouseLeave={() => cursorChangeHandler("")}
                         >
-                            {name}
+                            <span>{name}</span>
                         </MotionLink>
                     ))}
                 </motion.div>

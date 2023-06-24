@@ -41,7 +41,7 @@
             }
             h1 {
                 @extend %gallient-font;
-                font-size: 6vw;
+                font-size: 5.5vw;
                 font-weight: 400;
                 line-height: 6vw;
                 color: white;
@@ -134,3 +134,36 @@
         }
     }
 }
+
+.pseudo-text-effect {
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+    transition: transform .5s; //will be inherited
+    //transition-timing-function: cubic-bezier(1.000, 0.000, 0.000, 1.000);
+    display: block;
+    
+    &::after {
+      content: attr(data-after);
+      display: inline-block;
+      transform: translateY(100%);
+      position: absolute;
+      left: 0;
+      transition: inherit;
+    }
+    
+    > span {
+      display: inline-block;
+      transform: translateY(0%);
+      transition: inherit;
+    }
+    
+    &:hover {
+      > span {
+        transform: translateY(-100%);
+      }
+      &::after {
+        transform: translateY(0%);
+      }
+    }
+  }

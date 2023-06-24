@@ -155,8 +155,10 @@ const Contact: React.FC = () => {
                   <MotionLink
                     to={item.path}
                     variants={bottomItem}
+                    className='pseudo-text-effect'
+                    data-after={item.name}
                   >
-                      {item.name}
+                    <span>{item.name}</span>
                   </MotionLink>
                 </div>
               ))}
@@ -169,8 +171,10 @@ const Contact: React.FC = () => {
                     href={externalUrl}
                     rel="noopener noreferrer"
                     variants={bottomItem}
+                    className='pseudo-text-effect'
+                    data-after={name}
                   >
-                    {name}
+                    <span>{name}</span>
                   </motion.a>
                 </div>
               ))}
