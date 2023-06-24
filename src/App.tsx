@@ -18,6 +18,7 @@ function App() {
     <HelmetProvider>
       <Helmet>
           <link rel="preload" href="https://fonts.cdnfonts.com/css/gallient" as="font" crossOrigin="anonymous" />
+          <link rel="preload" href="https://fonts.cdnfonts.com/s/53659/GallientRegular-eZoMp.woff" as="font" crossOrigin="anonymous" />
       </Helmet>
       <CursorContextProvider>
         <AnimatePresence mode="wait">
