@@ -1,10 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { motion } from 'framer-motion';
 
 import "./style.scss";
 import useMousePosition from "../../hooks/useMousePosition";
 import { MouseContext } from "../../context/cursorContext";
+
+const isTouchEnabled = () => {
+  return ( 'ontouchstart' in window ) ||
+    ( navigator.maxTouchPoints > 0 );
+}
+
+const getWidth = () => {
+  return Math.max(
+    document.body.scrollWidth,
+    document.documentElement.scrollWidth,
+    document.body.offsetWidth,
+    document.documentElement.offsetWidth,
+    document.documentElement.clientWidth
+  );
+}
 
 const Cursor = () => {
   const { pathname } = useLocation();
@@ -15,6 +30,9 @@ const Cursor = () => {
   const ua = navigator.userAgent;
   const isFirefox = ua.includes('Firefox');
 
+  if ( isTouchEnabled() && (getWidth() < 700)) {
+    return null;
+  };
 
   return (
     <>
