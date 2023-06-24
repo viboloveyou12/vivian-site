@@ -10,7 +10,7 @@ const container = (delay: number):Variants => ({
   animate: {
     transition: {
       delayChildren: delay,
-      staggerChildren: 0.1,
+      staggerChildren: 0.01,
       staggerDirection: 1
     }
   }
@@ -95,12 +95,12 @@ function About() {
         </div>
         <div className="about-right">
           <div className="overflow">
-            <motion.h2 variants={wording(1)}>
+            <motion.h2 variants={wording(1)} initial="initial" animate="animate" exit="initial">
             I'm Vivian Yang, a front end developer and problem solver.
             </motion.h2>
           </div>
           <div className="overflow">
-            <motion.p variants={wording(1.5)}>
+            <motion.p variants={wording(1.2)} initial="initial" animate="animate" exit="initial">
             Born in 1996 in Taipei, Taiwan.
             <br></br>
             I have three years of experience in web development, I have worked in various industries from cloud service to OTT streaming service to build web applications. 
@@ -108,9 +108,9 @@ function About() {
             </motion.p>
           </div>
           <div className="overflow">
-            <motion.h3 variants={wording(2)}>SKILLS</motion.h3>
+            <motion.h3 variants={wording(1.5)} initial="initial" animate="animate" exit="initial">SKILLS</motion.h3>
           </div>
-          <motion.div variants={container(2.5)} className="about-skills overflow">
+          <motion.div variants={container(1.8)} initial="initial" exit="initial" animate="animate"className="about-skills overflow">
             {skills.map(({name, link}: skillProps) => (
               <motion.a 
                 href={link}

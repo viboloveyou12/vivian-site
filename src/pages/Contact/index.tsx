@@ -102,9 +102,13 @@ const Contact: React.FC = () => {
     // setTimeout(() => {
     //   setShowLoading(false)
     // }, 4000)
-    document.body.classList.add('black-bg', 'no-verticalScroll');
+    document.body.classList.add('no-verticalScroll');
+    document.body.style.backgroundColor = '#000000';
+    document.body.style.transition = 'background-color 1s ease';
     return () => {
-      document.body.classList.remove('black-bg', 'no-verticalScroll');
+      document.body.classList.remove('no-verticalScroll');
+      document.body.style.backgroundColor = '#EAE4DF';
+      document.body.style.transition = 'background-color 1s ease';
     }
   }, [])
 

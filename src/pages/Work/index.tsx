@@ -6,22 +6,31 @@ import Star from '../../img/star.svg';
 import data from './work.json';
 import { transition } from '../../animation';
 
-const variants: Variants = {
+const decorateLink: Variants = {
   initial: {
-    y: 50,
     opacity: 0,
-    rotate: 10,
     transition: transition
   },
   animate: {
-    y: 0,
     opacity: 1,
-    rotate: 0,
     transition: transition
   },
   exit: {
     y: 50,
     opacity: 0,
+    transition: transition
+  }
+}
+
+const variants: Variants = {
+  initial: {
+    y: 50,
+    opacity: 0,
+    transition: transition
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
     transition: transition
   }
 }
@@ -120,7 +129,7 @@ function Work() {
       <main className="work">
         <div className="work-left">
           <div className='titleContainer'>
-            <motion.h1 variants={variants} exit="exit" animate="animate" initial="initial">
+            <motion.h1 variants={variants} exit="initial" animate="animate" initial="initial">
               Work
             </motion.h1>
           </div>
@@ -129,7 +138,7 @@ function Work() {
               variants={left}
               initial="initial"
               animate="animate"
-              exit="exit"
+              exit="initial"
             >
               {data.map((tab: Props ) => (
                 <div 
@@ -138,7 +147,15 @@ function Work() {
                   onClick={() => setSelectedTab(tab)}
                 >
                   {tab === selectedTab ? (
-                    <motion.div layoutId="underline" className="decorate-line" variants={variants}></motion.div>
+                    <motion.div 
+                      layoutId="underline"
+                      className="decorate-line"
+                      variants={decorateLink}
+                      exit="exit"
+                      animate="animate"
+                      initial="initial"
+                    >
+                    </motion.div>
                   ) : null}
                   <motion.li
                     className={tab === selectedTab ? 'isSelected' : '' }

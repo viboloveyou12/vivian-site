@@ -11,31 +11,16 @@ import { externalUrls } from "../constant";
 
 const MotionLink = motion(Link);
 
-const layout: Variants = {
-    initial: {
-        backgroundColor: '#EAE4DF',
-        transition: {
-            delay: .5,
-            ...transition
-        },
-    },
-    animate: {
-        transition: transition,
-        backgroundColor: '#000000'
-    }
-}
-
 const navContainer: Variants = {
     initial: {
         transition: {
-            delay: 1,
             staggerChildren: 0.2,
             staggerDirection: 1,
         }
     },
     animate: {
         transition: {
-            delay: 1,
+            delay: .5,
             staggerChildren: 0.2,
             staggerDirection: -1,
         },
@@ -171,16 +156,9 @@ const MainLayout = ({ path = '', children }: Props ) => {
     )
 
     return (
-        <motion.div 
-            className={`layout ${path === '/contact' && 'white-content'}`}
-            {...(path === '/contact' && { variants: layout })}
-            transition={transition}
-            animate="animate"
-            initial="initial"
-            exit="initial"
-        >
+        <motion.div className={`layout ${path === '/contact' && 'white-content'}`}>
             <motion.div
-                animate={{ opacity: 1 }}
+                animate={{ opacity: 1, transition: { delay: .5, ...transition } }}
                 initial={{ opacity: 0 }}
                 exit={{ opacity: 0 }}
                 transition={transition}
