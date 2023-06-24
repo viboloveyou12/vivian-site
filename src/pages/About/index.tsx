@@ -4,6 +4,7 @@ import MainLayout from '../../layout/MainLayout';
 import Portrait from '../../img/portrait.png';
 import { transition } from '../../animation';
 import './style.scss';
+import skills from './skill.json';
 
 const container = (delay: number):Variants => ({
   animate: {
@@ -65,8 +66,10 @@ const image: Variants = {
   }
 }
 
-const skills = ['AWS', 'Node.js', 'React.js', 'Next.js', 'Google Analytic', 'Google Tag Manager', 'Next.js', 'CMS', 'Git', 'AWS', 'Node.js', 'React.js'];
-const aboutLetters = ['A', 'b', 'o', 'u', 't'];
+interface skillProps {
+  name: string;
+  link: string;
+}
 
 function About() {
 
@@ -76,7 +79,7 @@ function About() {
         <div className="about-left">
           <motion.div initial="initial" animate="animate" exit="initial">
             <motion.h1 variants={container(1)}>
-              {aboutLetters.map((letter, key) => (
+              {['A', 'b', 'o', 'u', 't'].map((letter, key) => (
                 <motion.span variants={letterItem} key={`aboutLetter-${key}`} className="letter">{letter}</motion.span>
               ))}
             </motion.h1>
@@ -108,8 +111,14 @@ function About() {
             <motion.h3 variants={wording(2)}>SKILLS</motion.h3>
           </div>
           <motion.div variants={container(2.5)} className="about-skills overflow">
-            {skills.map((skill, key) => (
-              <motion.div variants={skillItem} key={skill+key}>{skill}</motion.div>
+            {skills.map(({name, link}: skillProps) => (
+              <motion.a 
+                href={link}
+                target="_blank"
+                variants={skillItem}
+                key={name}>
+                  {name}
+              </motion.a>
             ))}
           </motion.div>
         </div>

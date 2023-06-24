@@ -79,7 +79,7 @@
         .about-skills {
             width: 100%;
             max-width: 800px;
-            div {
+            a {
                 border: solid 1px $black-color;
                 border-radius: 10px;
                 display: inline-block;
@@ -87,6 +87,8 @@
                 font-size: 13px;
                 margin-right: 10px;
                 margin-bottom: 10px;
+                color: $black-color;
+                text-decoration: none;
                 &:hover {
                     background-color: $black-color;
                     color: white;

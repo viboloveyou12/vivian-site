@@ -1,0 +1,70 @@
+[
+    {
+        "name": "Javascript",
+        "link": "https://www.javascript.com/"
+    },
+    {
+        "name": "Typescript",
+        "link": "https://www.typescriptlang.org/"
+    },
+    {
+        "name": "AWS",
+        "link": "https://aws.amazon.com/"
+    },
+    {
+        "name": "Node.js",
+        "link": "https://nodejs.org/en/"
+    },
+    {
+        "name": "React.js",
+        "link": "https://reactjs.org/"
+    },
+    {
+        "name": "Next.js",
+        "link": "https://nextjs.org/"
+    },
+    {
+        "name": "Redux",
+        "link": "https://redux.js.org/"
+    },
+    {
+        "name": "Google Analytic",
+        "link": "https://analytics.google.com/analytics/web/"
+    },
+    {
+        "name": "Google Tag Manager",
+        "link": "https://tagmanager.google.com/"
+    },
+    {
+        "name": "RESTful API",
+        "link": "https://restfulapi.net/"
+    },
+    {
+        "name": "React Testing Library",
+        "link": "https://testing-library.com/docs/react-testing-library/intro/"
+    },
+    {
+        "name": "Jest",
+        "link": "https://jestjs.io/"
+    },
+    {
+        "name": "Scss",
+        "link": "https://sass-lang.com/"
+    },
+    {
+        "name": "SWR.js",
+        "link": "https://swr.vercel.app/"
+    },
+    {
+        "name": "Babel",
+        "link": "https://babeljs.io/"
+    },
+    {
+        "name": "Webpack",
+        "link": "https://webpack.js.org/"
+    },
+    {
+        "name": "CI/CD",
+        "link": ""
+    }
+]
