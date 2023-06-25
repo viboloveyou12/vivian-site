@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './style.scss';
 let canvas: HTMLCanvasElement;
 
@@ -76,7 +76,6 @@ class Blob {
     ctx.quadraticCurveTo(p1.x, p1.y, xc, yc);
     // ctx.lineTo(_p2.x, _p2.y);
 
-    // ctx.closePath();
     ctx.fillStyle = this.color;
     ctx.fill();
     ctx.strokeStyle = '#33FFB5';
@@ -109,7 +108,6 @@ class Blob {
     if(value instanceof HTMLElement && value.tagName.toLowerCase() === 'canvas') {
       this._canvas = canvas;
       this.ctx = this._canvas.getContext('2d');
-      // this.ctx.scale(1.5, 1.5);
     }
   }
   get canvas() {
@@ -260,11 +258,10 @@ const Canvas = ({ path }: CanvasProps) => {
     let ref = React.useRef<HTMLInputElement>(null);
     let blob = new Blob();
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (ref.current!.children.length) return;
 
         canvas = document.createElement('canvas') as HTMLCanvasElement;
-
         ref.current!.appendChild(canvas);
 
         let resize = function() {
@@ -318,8 +315,8 @@ const Canvas = ({ path }: CanvasProps) => {
             if(nearestPoint) {
               let strength = { x: oldMousePoint.x - e.clientX, y: oldMousePoint.y - e.clientY };
               let sqrtStrength = Math.sqrt((strength.x * strength.x) + (strength.y * strength.y)) * 5;
-              if(sqrtStrength > 900) sqrtStrength = 900;
-              (nearestPoint as Point).acceleration = sqrtStrength / 900 * (hover ? -1 : 1);
+              if(sqrtStrength > 1000) sqrtStrength = 1000;
+              (nearestPoint as Point).acceleration = sqrtStrength / 1000 * (hover ? -1 : 1);
             }
           }
           
@@ -331,7 +328,14 @@ const Canvas = ({ path }: CanvasProps) => {
         blob.canvas = canvas;
         blob.init();
         blob.render();
-    })
+
+        return () => {
+          if (path === '/about' || path === '/contact') {
+            window.removeEventListener('resize', resize);
+            window.removeEventListener('pointermove', mouseMove);
+          }
+        }
+    }, [path]);
 
     return (
       <div 
