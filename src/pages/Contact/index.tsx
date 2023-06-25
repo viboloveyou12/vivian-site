@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, Variants } from 'framer-motion';
 import MainLayout from '../../layout/MainLayout';
@@ -98,6 +98,10 @@ const media = [
 
 const Contact: React.FC = () => {
   //const [showLoading, setShowLoading] = useState(true);
+  const [matches, setMatches] = useState(
+    window.matchMedia("(min-width: 400px)").matches
+  );
+
   useEffect(() => {
     // setTimeout(() => {
     //   setShowLoading(false)
@@ -105,12 +109,18 @@ const Contact: React.FC = () => {
     document.body.classList.add('no-verticalScroll');
     document.body.style.backgroundColor = '#000000';
     document.body.style.transition = 'background-color 1s ease';
+
+    window.matchMedia("(min-width: 400px)")
+      .addEventListener('change', e => setMatches( e.matches ));
+
     return () => {
+      window.matchMedia("(min-width: 400px)")
+        .removeEventListener('change', e => setMatches( e.matches ));
       document.body.classList.remove('no-verticalScroll');
       document.body.style.backgroundColor = '#EAE4DF';
       document.body.style.transition = 'background-color 1s ease';
     }
-  }, [])
+  }, []);
 
   return (
     <MainLayout path="/contact">
@@ -139,8 +149,10 @@ const Contact: React.FC = () => {
                 exit="hidden"
                 variants={top(1)}
               >
-                HI, I’m currently looking for new opportunities.<br></br> 
-                Whether you have a question or just want to say hi,<br></br> 
+                HI, I’m currently looking for new opportunities.
+                {matches ? <br></br> : ' '}
+                Whether you have a question or just want to say hi,
+                {matches ? <br></br> : ' '}
                 I’ll try my best to get back to you :)
               </motion.p>
             </div>

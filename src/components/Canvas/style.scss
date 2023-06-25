@@ -24,3 +24,9 @@ canvas {
 .none {
     display: none;
 }
+
+@media screen and (max-width: 700px) {
+    .align-left {
+        left: calc(-100vw/4);
+    }
+}
