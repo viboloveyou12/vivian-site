@@ -1,6 +1,6 @@
 # Vivian Personal Webaite
 
-[Website](https://www.vivian-yang.uk/) 💞
+See the [Website](https://www.vivian-yang.uk/)  💞
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
