@@ -1,8 +1,6 @@
 .canvas {
     touch-action: none;
     position: fixed;
-    width: 40vw;
-    height: 30vh;
     left: 0;
     right: 0;
     top: 0;
@@ -15,10 +13,6 @@ canvas {
 
 .align-left {
     left: calc(-100vw/1.5);
-}
-
-.align-right {
-    // left: -70vw;
 }
 
 .none {

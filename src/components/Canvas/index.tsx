@@ -276,25 +276,21 @@ const Canvas = ({ path }: CanvasProps) => {
         
         let oldMousePoint = { x: 0, y: 0};
         let hover = false;
-        let mouseMove = function(e: MouseEvent) {
-          
+        let mouseMove = function(e: any, isInit:boolean = false) {
           let pos = blob.center;
           let diff = { x: e.clientX - pos.x, y: e.clientY - pos.y };
           let dist = Math.sqrt((diff.x * diff.x) + (diff.y * diff.y));
           let angle = 0;
           
           blob.mousePos = { x: pos.x - e.clientX, y: pos.y - e.clientY };
-          
-          if(dist < blob.radius && hover === false) {
+          if(dist < blob.radius && (isInit ? hover : !hover)) {
             let vector = { x: e.clientX - pos.x, y: e.clientY - pos.y };
             angle = Math.atan2(vector.y, vector.x);
             hover = true;
-            // blob.color = '#77FF00';
-          } else if(dist > blob.radius && hover === true){ 
+          } else if(dist > blob.radius && (isInit ? !hover : hover)){ 
             let vector = { x: e.clientX - pos.x, y: e.clientY - pos.y };
             angle = Math.atan2(vector.y, vector.x);
             hover = false;
-            // Not sure
             //blob.color = null; 
           }
           
@@ -323,11 +319,12 @@ const Canvas = ({ path }: CanvasProps) => {
           oldMousePoint.x = e.clientX;
           oldMousePoint.y = e.clientY;
         }
-        // window.addEventListener('mousemove', mouseMove);
         window.addEventListener('pointermove', mouseMove);
         blob.canvas = canvas;
         blob.init();
         blob.render();
+
+        mouseMove({clientX: 150, clientY: 150}, true)
 
         return () => {
           if (path === '/about' || path === '/contact') {
