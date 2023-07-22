@@ -18,7 +18,7 @@ const decoratedLine: Variants = {
   show: {
       width: '100%',
       transition: {
-        duration: 1,
+        duration: .7,
         delay: .3
       }
   }
