@@ -110,7 +110,7 @@ function About() {
           <div className="overflow">
             <motion.h3 variants={wording(1.5)} initial="initial" animate="animate" exit="initial">SKILLS</motion.h3>
           </div>
-          <motion.div variants={container(1.8)} initial="initial" exit="initial" animate="animate"className="about-skills overflow">
+          <motion.div variants={container(1.8)} initial="initial" exit="initial" animate="animate" className="about-skills overflow">
             {skills.map(({name, link}: skillProps) => (
               <motion.a 
                 href={link}
