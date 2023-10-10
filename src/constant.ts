@@ -3,4 +3,5 @@ export const externalUrls = {
     github: 'https://github.com/viboloveyou12',
     email: 'mailto:yangvi0158@gmail.com',
     behance: 'https://www.behance.net/viviyang',
+    medium: 'https://viboloveyou12.medium.com/'
 }

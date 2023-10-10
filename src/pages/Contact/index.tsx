@@ -73,10 +73,16 @@ const bottomItem: Variants = {
 const pages = [{
     name: 'Home',
     path: '/'
-  }, {
+  },
+  {
     name: 'Work',
     path: '/work'
-  }, {
+  },
+  {
+    name: 'Project',
+    path: '/project'
+  },
+  {
     name: 'About',
     path: '/about'
   }
@@ -93,6 +99,10 @@ const media = [
   {
     name: 'Email',
     externalUrl: externalUrls.email
+  },
+  {
+    name: 'Medium',
+    externalUrl: externalUrls.medium
   },
 ]
 

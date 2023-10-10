@@ -159,7 +159,7 @@ const thirdString = ["b", "a", "s", "e", "d", <>&nbsp;</>, "in", <>&nbsp;</>, "L
 const Home: React.FC = () => {
   const h1 = useRef(null);
   // const { width, height }  = useContainerDimensions(h1);
-  const pages = ['Work', 'About', 'Contact'];
+  const pages = ['Work', 'Project', 'About', 'Contact'];
 
   useEffect(() => {
     document.body.classList.add('no-verticalScroll');

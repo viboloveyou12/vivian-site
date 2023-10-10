@@ -52,7 +52,7 @@ const decoratedLine: Variants = {
     }
 }
 
-const pages = ['Work', 'About', 'Contact'];
+const pages = ['Work', 'Project', 'About', 'Contact'];
 const media = [
     { name: "B", externalUrl: externalUrls.behance },
     { name: "G", externalUrl: externalUrls.github },
