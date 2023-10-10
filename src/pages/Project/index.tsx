@@ -114,7 +114,7 @@ function Project() {
                   onMouseLeave={() => cursorChangeHandler("")}
                 >
                   <motion.a href={item.url} target='_blank' variants={title(key*.2)}>
-                      {[...item.name.toUpperCase()].map((letter, key) => (
+                      {[...item.name].map((letter, key) => (
                         <motion.span key={`first-${key}`} variants={titleLetter}>
                           {letter}  
                         </motion.span>
