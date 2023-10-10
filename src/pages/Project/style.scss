@@ -43,7 +43,7 @@
 
         h1 {
             @extend %gallient-font;
-            font-size: 6.5vw;
+            font-size: 7vw;
             font-weight: 400;
             margin: 0;
             overflow: hidden;
@@ -99,7 +99,7 @@
 
         .project-right {
             h1 {
-                font-size: 7vw;
+                font-size: 10vw;
             }
         }
     }
@@ -114,7 +114,7 @@
         }
         .project-right {
             h1 {
-                font-size: min(60px, 10vw);
+                font-size: 10vw;
             }
             p {
                 font-size: 14px;

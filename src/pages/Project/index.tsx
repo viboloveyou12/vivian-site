@@ -60,12 +60,16 @@ function Project() {
   const { cursorChangeHandler } = useContext(MouseContext);
 
   useEffect(() => {
-    document.body.classList.add('no-verticalScroll');
+    if (matches) {
+      document.body.classList.remove('no-verticalScroll');
+    } else {
+      document.body.classList.add('no-verticalScroll');
+    }
 
     return () => {
       document.body.classList.remove('no-verticalScroll');
     }
-  }, []);
+  }, [matches]);
 
   useEffect(() => {
     !isPresent && safeToRemove();
