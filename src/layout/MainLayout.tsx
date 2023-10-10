@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom';
 import Canvas from '../components/Canvas';
 import './style.scss';
 import Star from '../img/star.svg';
-// import { MouseContext } from '../context/cursorContext';
-// import { useContext } from "react";
+import { MouseContext } from '../context/cursorContext';
+import { useContext } from "react";
 import { transition, slideIn } from '../animation';
 import { externalUrls } from "../constant";
 
@@ -65,8 +65,7 @@ interface Props {
 }
 
 const MainLayout = ({ path = '', children }: Props ) => {
-    // eslint-disable-next-line
-    // const { cursorType, cursorChangeHandler } = useContext(MouseContext);
+    const { cursorChangeHandler } = useContext(MouseContext);
 
     const renderHeader = (path: string) => (
         path === '/' ? (
@@ -100,8 +99,8 @@ const MainLayout = ({ path = '', children }: Props ) => {
                             variants={navItem}
                             className='pseudo-text-effect'
                             data-after={name}
-                            // onMouseEnter={() => cursorChangeHandler("hovered")}
-                            // onMouseLeave={() => cursorChangeHandler("")}
+                            onMouseEnter={() => cursorChangeHandler("hovered")}
+                            onMouseLeave={() => cursorChangeHandler("")}
                         >
                             <span>{name}</span>
                         </MotionLink>
@@ -118,6 +117,8 @@ const MainLayout = ({ path = '', children }: Props ) => {
                         initial="initial"
                         animate="animate"
                         exit="initial"
+                        onMouseEnter={() => cursorChangeHandler("hovered")}
+                        onMouseLeave={() => cursorChangeHandler("")}
                     >
                         <span className="the-arrow -left">
                             <span className="shaft"></span>
@@ -146,6 +147,8 @@ const MainLayout = ({ path = '', children }: Props ) => {
                             rel="noopener noreferrer"
                             key={name}
                             variants={navItem}
+                            onMouseEnter={() => cursorChangeHandler("hovered")}
+                            onMouseLeave={() => cursorChangeHandler("")}
                         >
                             {name}
                         </motion.a>

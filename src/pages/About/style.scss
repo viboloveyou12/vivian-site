@@ -101,9 +101,7 @@
 
 @media screen and (max-width: 700px) {
     .about {
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: start;
+        display: block;
         width: calc(100vw - 80px);
 
         &-left {

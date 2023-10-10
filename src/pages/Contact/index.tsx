@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, Variants } from 'framer-motion';
 import MainLayout from '../../layout/MainLayout';
+import { MouseContext } from '../../context/cursorContext';
 //import withTransition from '../../HOC/withTransition';
 import Star from '../../img/star.svg';
 import { transition } from '../../animation';
@@ -108,6 +109,7 @@ const media = [
 
 const Contact: React.FC = () => {
   //const [showLoading, setShowLoading] = useState(true);
+  const { cursorChangeHandler } = useContext(MouseContext);
   const [matches, setMatches] = useState(
     window.matchMedia("(min-width: 400px)").matches
   );
@@ -183,6 +185,8 @@ const Contact: React.FC = () => {
                     variants={bottomItem}
                     className='pseudo-text-effect'
                     data-after={item.name}
+                    onMouseEnter={() => cursorChangeHandler("hovered")}
+                    onMouseLeave={() => cursorChangeHandler("")}
                   >
                     <span>{item.name}</span>
                   </MotionLink>
@@ -199,6 +203,8 @@ const Contact: React.FC = () => {
                     variants={bottomItem}
                     className='pseudo-text-effect'
                     data-after={name}
+                    onMouseEnter={() => cursorChangeHandler("hovered")}
+                    onMouseLeave={() => cursorChangeHandler("")}
                   >
                     <span>{name}</span>
                   </motion.a>

@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext, memo } from 'react';
 import { motion, AnimatePresence, usePresence, Variants } from 'framer-motion';
 import MainLayout from '../../layout/MainLayout';
+import { MouseContext } from '../../context/cursorContext';
 import './style.scss';
 import Star from '../../img/star.svg';
 import data from './work.json';
@@ -76,7 +77,8 @@ interface Props {
     job_desc: string[];
 }
 
-function JobItem({ data }: JobItemProps) {
+const JobItem = memo(({ data }: JobItemProps) => {
+  const { cursorChangeHandler } = useContext(MouseContext);
   const {
     company,
     company_url,
@@ -101,6 +103,8 @@ function JobItem({ data }: JobItemProps) {
           target="_blank"
           rel="noreferrer noopener"
           variants={item}
+          onMouseEnter={() => cursorChangeHandler("hovered")}
+          onMouseLeave={() => cursorChangeHandler("")}
         >@{company}</motion.a>
         <motion.p className="job-duration" variants={item}>{work_duration}</motion.p>
       </div>
@@ -114,11 +118,12 @@ function JobItem({ data }: JobItemProps) {
       </div>
     </motion.div>
   )
-}
+})
 
 function Work() {
   const [selectedTab, setSelectedTab] = useState(data[0]);
   const [isPresent, safeToRemove] = usePresence();
+  const { cursorChangeHandler } = useContext(MouseContext);
 
   useEffect(() => {
     !isPresent && safeToRemove();
@@ -162,10 +167,9 @@ function Work() {
                     variants={variants}
                     whileHover={{ 
                       scale: 1.05,
-                      transition: {
-                        type: "spring", stiffness: 400, damping: 10
-                      }
                     }}
+                    onMouseEnter={() => cursorChangeHandler("hovered")}
+                    onMouseLeave={() => cursorChangeHandler("")}
                   >
                     {tab.company}
                   </motion.li>

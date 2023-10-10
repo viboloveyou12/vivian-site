@@ -100,6 +100,12 @@
 
             &-right {
                 align-items: flex-end;
+
+                a {
+                    &:hover {
+                        color: $blue-color;
+                    }
+                }
             }
 
 

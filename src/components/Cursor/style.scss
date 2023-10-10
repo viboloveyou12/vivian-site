@@ -35,11 +35,10 @@
   }
   
   .ring.hovered {
-    display: none;
-  }
-  
-  .dot.hovered {
-    display: none;
+    width: 70px;
+    height: 70px;
+    left: -25px;
+    top: -25px;
   }
 
   .white {
