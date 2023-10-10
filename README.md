@@ -8,7 +8,7 @@
   👉<a href="https://www.vivian-yang.uk/" target="_blank">Website Link</a>👈
 </p>
 <p align="center">
-  My personal website built with <a href="https://react.dev/" target="_blank">React </a>and hosted with <a href="https://vercel.com/dashboard" target="_blank">Vercel</a>
+  My personal website built with <a href="https://react.dev/" target="_blank">React </a>and hosted with <a href="https://vercel.com/dashboard" target="_blank">Vercel</a>.
 </p>
 
 
