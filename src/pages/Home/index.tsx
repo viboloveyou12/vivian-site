@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-import MainLayout from '../../layout/MainLayout';
+import MainLayout, {pages} from '../../layout/MainLayout';
 import variants from './transitions';
 import './style.scss';
 
@@ -14,7 +14,6 @@ const MotionLink = motion(Link);
 
 const Home: React.FC = () => {
   const h1 = useRef(null);
-  const pages = ['Work', 'Project', 'About', 'Contact'];
 
   useEffect(() => {
     document.body.classList.add('no-verticalScroll');

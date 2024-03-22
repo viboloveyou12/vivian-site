@@ -5,7 +5,7 @@ import MainLayout from '../../layout/MainLayout';
 import { MouseContext } from '../../context/cursorContext';
 import variants from './transitions';
 import Star from '../../img/star.svg';
-import { externalUrls } from '../../constant';
+import { socialMediaInfo } from '../../constant';
 import './style.scss';
 
 const MotionLink = motion(Link);
@@ -27,30 +27,13 @@ const pages = [{
     path: '/about'
   }
 ];
-const media = [
-  {
-    name: 'Linkedln',
-    externalUrl: externalUrls.linkedin
-  },
-  {
-    name: 'Github',
-    externalUrl: externalUrls.github
-  },
-  {
-    name: 'Email',
-    externalUrl: externalUrls.email
-  },
-  {
-    name: 'Medium',
-    externalUrl: externalUrls.medium
-  },
-]
 
 const Contact: React.FC = () => {
   const { cursorChangeHandler } = useContext(MouseContext);
   const [matches, setMatches] = useState(
     window.matchMedia("(min-width: 400px)").matches
   );
+  const { linkedin, github, email, medium } = socialMediaInfo;
 
   useEffect(() => {
     document.body.classList.add('no-verticalScroll');
@@ -128,19 +111,19 @@ const Contact: React.FC = () => {
               ))}
             </div>
             <div className="bottom-right">
-              {media.map(({name, externalUrl}, key) => (
-                <div className='bottomContainer' key={`bottom-right-${key}`}>
+              {[linkedin, github, email, medium].map(({title, url}) => (
+                <div className='bottomContainer' key={title}>
                   <motion.a
                     target="_blank"
-                    href={externalUrl}
+                    href={url}
                     rel="noopener noreferrer"
-                    variants={bottomItem}
+                    variants={variants.bottomItem}
                     className='pseudo-text-effect'
-                    data-after={name}
+                    data-after={title}
                     onMouseEnter={() => cursorChangeHandler("hovered")}
                     onMouseLeave={() => cursorChangeHandler("")}
                   >
-                    <span>{name}</span>
+                    <span>{title}</span>
                   </motion.a>
                 </div>
               ))}

@@ -6,17 +6,12 @@ import './style.scss';
 import Star from '../img/star.svg';
 import { MouseContext } from '../context/cursorContext';
 import { useContext } from "react";
-import { externalUrls } from "../constant";
 import { slideIn, transition } from '../animation';
+import { socialMediaInfo } from "../constant";
 import variants from './transition';
 
+export const pages = ['Work', 'Project', 'About', 'Contact'];
 
-const pages = ['Work', 'Project', 'About', 'Contact'];
-const media = [
-    { name: "B", externalUrl: externalUrls.behance },
-    { name: "G", externalUrl: externalUrls.github },
-    { name: "L", externalUrl: externalUrls.linkedin },
-];
 const MotionLink = motion(Link);
 
 interface Props {
@@ -26,6 +21,7 @@ interface Props {
 
 const MainLayout = ({ path = '', children }: Props ) => {
     const { cursorChangeHandler } = useContext(MouseContext);
+    const { behance, github, linkedin } = socialMediaInfo; 
 
     const renderHeader = (path: string) => (
         path === '/' ? (
@@ -99,18 +95,18 @@ const MainLayout = ({ path = '', children }: Props ) => {
                         className="decorate-line"
                         variants={variants.decoratedLine}
                     ></motion.div>
-                    {media.map(({name, externalUrl}) => (
+                    {[behance, github, linkedin].map(({url, title}) => (
                         <motion.a 
                             className="header-media"
                             target="_blank"
-                            href={externalUrl}
+                            href={url}
                             rel="noopener noreferrer"
-                            key={name}
+                            key={title}
                             variants={variants.navItem}
                             onMouseEnter={() => cursorChangeHandler("hovered")}
                             onMouseLeave={() => cursorChangeHandler("")}
                         >
-                            {name}
+                            {title[0].toUpperCase()}
                         </motion.a>
                     ))}
                 </motion.div>
