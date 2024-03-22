@@ -5,7 +5,10 @@ const variants = {
     title: (delay: number): Variants => ({
         initial: {
             y: 0,
-            transition: transition,
+            transition: {
+                ...transition,
+                duration: 1,
+            },
         },
         animate: {
             y: 0,
@@ -20,7 +23,10 @@ const variants = {
         initial: {
             y: 400,
             opacity: 0,
-            transition: transition,
+            transition: {
+                ...transition,
+                duration: 1,
+            },
         },
         animate: {
             y: 0,
@@ -35,7 +41,10 @@ const variants = {
     titleLetter: {
         initial: {
             y: 400,
-            transition: transition,
+            transition: {
+                ...transition,
+                duration: 1,
+            },
         },
         animate: {
             y: 0,
@@ -43,8 +52,8 @@ const variants = {
                 duration: 1.5,
                 ease: [0.43, 0.13, 0.23, 0.96],
             },
-        }
-    }
+        },
+    },
 }
 
-export default variants;
+export default variants

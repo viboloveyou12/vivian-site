@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext, memo } from 'react';
 import { motion, AnimatePresence, usePresence } from 'framer-motion';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import MainLayout from '../../layout/MainLayout';
 import { MouseContext } from '../../context/cursorContext';
 import variants from './transitions';
@@ -65,10 +66,23 @@ function Work() {
   const [selectedTab, setSelectedTab] = useState(data[0]);
   const [isPresent, safeToRemove] = usePresence();
   const { cursorChangeHandler } = useContext(MouseContext);
+  const matches = useMediaQuery('(max-width:850px)');
 
   useEffect(() => {
     !isPresent && safeToRemove();
   }, [isPresent, safeToRemove])
+
+  useEffect(() => {
+    if (matches) {
+      document.body.classList.remove('no-verticalScroll');
+    } else {
+      document.body.classList.add('no-verticalScroll');
+    }
+
+    return () => {
+      document.body.classList.remove('no-verticalScroll');
+    }
+  }, [matches]);
 
   return (
     <MainLayout path="/work">
