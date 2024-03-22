@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { motion, Variants } from 'framer-motion';
 import MainLayout from '../../layout/MainLayout';
 import { MouseContext } from '../../context/cursorContext';
-//import withTransition from '../../HOC/withTransition';
 import Star from '../../img/star.svg';
 import { transition } from '../../animation';
 import { externalUrls } from '../../constant';
@@ -108,16 +107,12 @@ const media = [
 ]
 
 const Contact: React.FC = () => {
-  //const [showLoading, setShowLoading] = useState(true);
   const { cursorChangeHandler } = useContext(MouseContext);
   const [matches, setMatches] = useState(
     window.matchMedia("(min-width: 400px)").matches
   );
 
   useEffect(() => {
-    // setTimeout(() => {
-    //   setShowLoading(false)
-    // }, 4000)
     document.body.classList.add('no-verticalScroll');
     document.body.style.backgroundColor = '#000000';
     document.body.style.transition = 'background-color 1s ease';
@@ -136,7 +131,6 @@ const Contact: React.FC = () => {
 
   return (
     <MainLayout path="/contact">
-      {/* {showLoading && <Loading/>} */}
       <main className="contact">
         <div className="contact-content">
           <div 
@@ -218,5 +212,4 @@ const Contact: React.FC = () => {
   )
 }
 
-//export default withTransition(Contact);
 export default Contact;

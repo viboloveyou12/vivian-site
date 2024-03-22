@@ -1,6 +1,5 @@
 import { motion, Variants } from "framer-motion";
 import MainLayout from '../../layout/MainLayout';
-// import withTransition from '../../HOC/withTransition';
 import Portrait from '../../img/portrait.png';
 import { transition } from '../../animation';
 import './style.scss';
@@ -128,4 +127,3 @@ function About() {
 }
 
 export default About;
-//export default withTransition(About);
