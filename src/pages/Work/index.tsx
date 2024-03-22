@@ -1,70 +1,11 @@
 import { useState, useEffect, useContext, memo } from 'react';
-import { motion, AnimatePresence, usePresence, Variants } from 'framer-motion';
+import { motion, AnimatePresence, usePresence } from 'framer-motion';
 import MainLayout from '../../layout/MainLayout';
 import { MouseContext } from '../../context/cursorContext';
+import variants from './transitions';
 import './style.scss';
 import Star from '../../img/star.svg';
 import data from './work.json';
-import { transition } from '../../animation';
-
-const decorateLink: Variants = {
-  initial: {
-    opacity: 0,
-    transition: transition
-  },
-  animate: {
-    opacity: 1,
-    transition: transition
-  },
-  exit: {
-    y: 50,
-    opacity: 0,
-    transition: transition
-  }
-}
-
-const variants: Variants = {
-  initial: {
-    y: 50,
-    opacity: 0,
-    transition: transition
-  },
-  animate: {
-    y: 0,
-    opacity: 1,
-    transition: transition
-  }
-}
-
-const left: Variants = {
-  animate: {
-    transition: {
-      staggerChildren: 0.1,
-    }
-  }
-}
-
-const right: Variants = {
-  animate: {
-    transition: {
-      staggerChildren: 0.1,
-      // delayChildren: 0.5,
-    }
-  },
-}
-
-const item: Variants = {
-  initial: {
-    y: 50,
-    opacity: 0,
-    transition: transition
-  },
-  animate: {
-    y: 0,
-    opacity: 1,
-    transition: transition
-  }
-}
 
 interface JobItemProps {
   data: Props
@@ -88,13 +29,13 @@ const JobItem = memo(({ data }: JobItemProps) => {
   } = data || {};
   return (
     <motion.div
-      variants={right}
+      variants={variants.stagger}
       animate="animate"
       initial="initial"
       exit="initial"
     >
       <div className="job-info">
-        <motion.div className="job-info-title" variants={item} >
+        <motion.div className="job-info-title" variants={variants.basic} >
           {job_title}
         </motion.div>
         <motion.a
@@ -102,17 +43,17 @@ const JobItem = memo(({ data }: JobItemProps) => {
           href={company_url}
           target="_blank"
           rel="noreferrer noopener"
-          variants={item}
+          variants={variants.basic}
           onMouseEnter={() => cursorChangeHandler("hovered")}
           onMouseLeave={() => cursorChangeHandler("")}
         >@{company}</motion.a>
-        <motion.p className="job-duration" variants={item}>{work_duration}</motion.p>
+        <motion.p className="job-duration" variants={variants.basic}>{work_duration}</motion.p>
       </div>
       <div className="job-desc">
         {job_desc.map((desc, key) => (
           <div className="desc-item" key={`job_desc_${key}`}>
-            <motion.img src={Star} alt="test" variants={item}></motion.img>
-            <motion.p variants={item}>{desc}</motion.p>
+            <motion.img src={Star} alt="test" variants={variants.basic}></motion.img>
+            <motion.p variants={variants.basic}>{desc}</motion.p>
           </div>
         ))}
       </div>
@@ -134,13 +75,13 @@ function Work() {
       <main className="work">
         <div className="work-left">
           <div className='titleContainer'>
-            <motion.h1 variants={variants} exit="initial" animate="animate" initial="initial">
+            <motion.h1 variants={variants.basic} exit="initial" animate="animate" initial="initial">
               Work
             </motion.h1>
           </div>
           <aside>
             <motion.ul
-              variants={left}
+              variants={variants.stagger}
               initial="initial"
               animate="animate"
               exit="initial"
@@ -155,7 +96,7 @@ function Work() {
                     <motion.div 
                       layoutId="underline"
                       className="decorate-line"
-                      variants={decorateLink}
+                      variants={variants.decorateLink}
                       exit="exit"
                       animate="animate"
                       initial="initial"
@@ -164,7 +105,7 @@ function Work() {
                   ) : null}
                   <motion.li
                     className={tab === selectedTab ? 'isSelected' : '' }
-                    variants={variants}
+                    variants={variants.basic}
                     whileHover={{ 
                       scale: 1.05,
                     }}

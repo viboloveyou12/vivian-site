@@ -1,56 +1,15 @@
 import { ReactNode } from 'react';
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from 'react-router-dom';
 import Canvas from '../components/Canvas';
 import './style.scss';
 import Star from '../img/star.svg';
 import { MouseContext } from '../context/cursorContext';
 import { useContext } from "react";
-import { transition, slideIn } from '../animation';
 import { externalUrls } from "../constant";
+import { slideIn, transition } from '../animation';
+import variants from './transition';
 
-const MotionLink = motion(Link);
-
-const navContainer: Variants = {
-    initial: {
-        transition: {
-            staggerChildren: 0.2,
-            staggerDirection: 1,
-        }
-    },
-    animate: {
-        transition: {
-            delay: .5,
-            staggerChildren: 0.2,
-            staggerDirection: -1,
-        },
-    },
-}
-
-const navItem: Variants = {
-    initial: {
-        y: 50,
-        opacity: 0,
-        transition: transition
-    },
-    animate: {
-        y: 0,
-        opacity: 1,
-        transition: transition
-    },
-    
-}
-
-const decoratedLine: Variants = {
-    initial: {
-        width: 0,
-        transition: transition
-    },
-    animate: {
-        width: `calc(40vw - 150px)`,
-        transition: transition
-    }
-}
 
 const pages = ['Work', 'Project', 'About', 'Contact'];
 const media = [
@@ -58,6 +17,7 @@ const media = [
     { name: "G", externalUrl: externalUrls.github },
     { name: "L", externalUrl: externalUrls.linkedin },
 ];
+const MotionLink = motion(Link);
 
 interface Props {
     path?: string;
@@ -85,18 +45,18 @@ const MainLayout = ({ path = '', children }: Props ) => {
                     initial="initial"
                     animate="animate"
                     exit="initial"
-                    variants={navContainer}
+                    variants={variants.navContainer}
                 >
                     <motion.img
                         src={Star}
                         alt="header-icon"
-                        variants={navItem}
+                        variants={variants.navItem}
                     ></motion.img>
                     {pages.map((name, key) => (
                         <MotionLink 
                             to={`/${name.toLowerCase()}`}
                             key={`header-nav-${key}`}
-                            variants={navItem}
+                            variants={variants.navItem}
                             className='pseudo-text-effect'
                             data-after={name}
                             onMouseEnter={() => cursorChangeHandler("hovered")}
@@ -133,11 +93,11 @@ const MainLayout = ({ path = '', children }: Props ) => {
                     initial="initial"
                     animate="animate"
                     exit="initial"
-                    variants={navContainer}
+                    variants={variants.navContainer}
                 >
                     <motion.div 
                         className="decorate-line"
-                        variants={decoratedLine}
+                        variants={variants.decoratedLine}
                     ></motion.div>
                     {media.map(({name, externalUrl}) => (
                         <motion.a 
@@ -146,7 +106,7 @@ const MainLayout = ({ path = '', children }: Props ) => {
                             href={externalUrl}
                             rel="noopener noreferrer"
                             key={name}
-                            variants={navItem}
+                            variants={variants.navItem}
                             onMouseEnter={() => cursorChangeHandler("hovered")}
                             onMouseLeave={() => cursorChangeHandler("")}
                         >
